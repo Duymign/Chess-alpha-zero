@@ -8,13 +8,13 @@ import json
 import os
 from logging import getLogger
 
-from keras.engine.topology import Input
-from keras.engine.training import Model
-from keras.layers.convolutional import Conv2D
-from keras.layers.core import Activation, Dense, Flatten
-from keras.layers.merge import Add
-from keras.layers.normalization import BatchNormalization
-from keras.regularizers import l2
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import Activation, Dense, Flatten
+from tensorflow.keras.layers import Add, BatchNormalization
+from tensorflow.keras.regularizers import l2
+
 
 from chess_zero.agent.api_chess import ChessModelAPI
 from chess_zero.config import Config
