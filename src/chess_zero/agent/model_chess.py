@@ -143,7 +143,7 @@ class ChessModel:
             logger.debug(f"loading model from {config_path}")
             with open(config_path, "rt") as f:
                 self.model = Model.from_config(json.load(f))
-            self.model.load_weights(weight_path)
+            self.model.load_weights(weight_path, by_name=True)
             self.model._make_predict_function()
             self.digest = self.fetch_digest(weight_path)
             logger.debug(f"loaded model digest = {self.digest}")
