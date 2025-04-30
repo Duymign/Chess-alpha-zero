@@ -16,9 +16,10 @@ from chess_zero.config import Config
 from chess_zero.env.chess_env import canon_input_planes, is_black_turn, testeval
 from chess_zero.lib.data_helper import get_game_data_filenames, read_game_data_from_file, get_next_generation_model_dirs
 from chess_zero.lib.model_helper import load_best_model_weight
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import TensorBoard
+import tensorflow as tf
 
-from keras.optimizers import Adam
-from keras.callbacks import TensorBoard
 logger = getLogger(__name__)
 
 
@@ -100,7 +101,8 @@ class OptimizeWorker:
         """
         opt = Adam()
         losses = ['categorical_crossentropy', 'mean_squared_error'] # avoid overfit for supervised 
-        self.model.model.compile(optimizer=opt, loss=losses, loss_weights=self.config.trainer.loss_weights)
+        with tf.device('/GPU:0'):
+            self.model.model.compile(optimizer=opt, loss=losses, loss_weights=self.config.trainer.loss_weights)
 
     def save_current_model(self):
         """

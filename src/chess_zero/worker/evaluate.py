@@ -56,6 +56,8 @@ class EvaluateWorker:
                 logger.debug(f"New Model become best model: {model_dir}")
                 save_as_best_model(ng_model)
                 self.current_model = ng_model
+            else:
+                logger.debug("No new best model")
             self.move_model(model_dir)
 
     def evaluate_model(self, ng_model):
