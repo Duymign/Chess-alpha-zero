@@ -50,17 +50,17 @@ class EvaluateWorker:
         """
         while True:
             ng_model, model_dir = self.load_next_generation_model()
-            print(f"start evaluate model {model_dir}")
+            print(f"start evaluate model {model_dir}", flush=True)
             logger.debug(f"start evaluate model {model_dir}")
             ng_is_great = self.evaluate_model(ng_model)
             if ng_is_great:
                 logger.debug(f"New Model become best model: {model_dir}")
-                print(f"New Model become best model: {model_dir}")
+                print(f"New Model become best model: {model_dir}", flush=True)
                 save_as_best_model(ng_model)
                 self.current_model = ng_model
             else:
                 logger.debug("No new best model")
-                print("No new best model")
+                print("No new best model", flush=True)
             self.move_model(model_dir)
 
     def evaluate_model(self, ng_model):
