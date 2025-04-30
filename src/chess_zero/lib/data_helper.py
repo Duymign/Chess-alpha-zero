@@ -23,7 +23,11 @@ def pretty_print(env, colors):
     game.headers["Date"] = datetime.now().strftime("%Y.%m.%d")
     new_pgn.write(str(game) + "\n\n")
     new_pgn.close()
-    pyperclip.copy(env.board.fen())
+    try:
+        pyperclip.copy(env.board.fen())
+    except pyperclip.PyperclipException:
+        print(env.board.fen())
+
 
 
 def find_pgn_files(directory, pattern='*.pgn'):

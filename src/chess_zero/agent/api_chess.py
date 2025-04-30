@@ -60,7 +60,11 @@ class ChessModelAPI:
             data, result_pipes = [], []
             for pipe in ready:
                 while pipe.poll():
-                    data.append(pipe.recv())
+                    try:
+                        data.append(pipe.recv())
+                    except EOFError:
+                        break  # hoặc log lỗi rồi thoát khỏi thread
+
                     result_pipes.append(pipe)
 
             data = np.asarray(data, dtype=np.float32)
