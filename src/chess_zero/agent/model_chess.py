@@ -62,8 +62,6 @@ class ChessModel:
         in_x = x = Input((18, 8, 8))
 
         # (batch, channels, height, width)
-        print("cnn_filter_num =", mc.cnn_filter_num)  # thêm dòng này đầu hàm build
-        mc.cnn_filter_num = 256
         x = Conv2D(filters=mc.cnn_filter_num, kernel_size=mc.cnn_first_filter_size, padding="same",
                    data_format="channels_first", use_bias=False, kernel_regularizer=l2(mc.l2_reg),
                    name="input_conv-"+str(mc.cnn_first_filter_size)+"-"+str(mc.cnn_filter_num))(x)

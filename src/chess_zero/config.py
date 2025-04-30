@@ -47,7 +47,7 @@ class ResourceConfig:
 
         self.model_dir = os.environ.get("MODEL_DIR", os.path.join(self.data_dir, "model"))
         self.model_best_config_path = os.path.join(self.model_dir, "model_best_config.json")
-        self.model_best_weight_path = os.path.join(self.model_dir, "model_best_weight.h5")
+        self.model_best_weight_path = os.path.join(self.model_dir, "model_best.weights.h5")
 
         self.model_best_distributed_ftp_server = "alpha-chess-zero.mygamesonline.org"
         self.model_best_distributed_ftp_user = "2537576_chess"
@@ -57,7 +57,7 @@ class ResourceConfig:
         self.next_generation_model_dir = os.path.join(self.model_dir, "next_generation")
         self.next_generation_model_dirname_tmpl = "model_%s"
         self.next_generation_model_config_filename = "model_config.json"
-        self.next_generation_model_weight_filename = "model_weight.h5"
+        self.next_generation_model_weight_filename = "model.weights.h5"
 
         self.play_data_dir = os.path.join(self.data_dir, "play_data")
         self.play_data_filename_tmpl = "play_%s.json"
