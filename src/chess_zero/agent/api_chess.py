@@ -78,6 +78,10 @@ class ChessModelAPI:
             except Exception as e:
                 print(f"Lỗi khi chuyển data sang numpy: {e}")
                 continue
-            policy_ary, value_ary = self.agent_model.model.predict_on_batch(data)
-            for pipe, p, v in zip(result_pipes, policy_ary, value_ary):
-                pipe.send((p, float(v)))
+
+            try:
+                policy_ary, value_ary = self.agent_model.model.predict_on_batch(data)
+                for pipe, p, v in zip(result_pipes, policy_ary, value_ary):
+                    pipe.send((p, float(v)))
+            except Exception as e:
+                print(f"Lỗi khi dự đoán: {e}")
