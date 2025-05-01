@@ -66,7 +66,7 @@ class OptimizeWorker:
         shuffle(self.filenames)
         total_steps = self.config.trainer.start_total_steps
 
-        while True:
+        for i in range(5):
             self.fill_queue()
             steps = self.train_epoch(self.config.trainer.epoch_to_checkpoint)
             total_steps += steps
