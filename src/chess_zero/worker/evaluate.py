@@ -113,7 +113,10 @@ class EvaluateWorker:
         :param file model_dir: directory where model should be moved
         """
         rc = self.config.resource
-        new_dir = os.path.join(rc.next_generation_model_dir, "copies", model_dir.name)
+        from pathlib import Path
+
+        model_dir_name = Path(model_dir).name  # Lấy tên thư mục cuối cùng
+        new_dir = os.path.join(rc.next_generation_model_dir, "copies", model_dir_name)
         os.rename(model_dir, new_dir)
 
     def load_current_model(self):

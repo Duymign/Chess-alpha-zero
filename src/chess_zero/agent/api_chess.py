@@ -61,13 +61,23 @@ class ChessModelAPI:
             for pipe in ready:
                 while pipe.poll():
                     try:
-                        data.append(pipe.recv())
+                        obs = pipe.recv()
+                        if obs is not None:
+                            data.append(obs)
+                            result_pipes.append(pipe)
                     except EOFError:
                         break  # hoặc log lỗi rồi thoát khỏi thread
 
                     result_pipes.append(pipe)
 
-            data = np.asarray(data, dtype=np.float32)
+            try:
+                data = np.asarray(data, dtype=np.float32)
+                if None in data.shape or len(data.shape) < 2:
+                    print(f"Lỗi dữ liệu không hợp lệ: shape={data.shape}")
+                    continue
+            except Exception as e:
+                print(f"Lỗi khi chuyển data sang numpy: {e}")
+                continue
             policy_ary, value_ary = self.agent_model.model.predict_on_batch(data)
             for pipe, p, v in zip(result_pipes, policy_ary, value_ary):
                 pipe.send((p, float(v)))
