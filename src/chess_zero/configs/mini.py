@@ -5,7 +5,7 @@ version of the agent that is easier and quicker to run locally
 class EvaluateConfig:
     def __init__(self):
         self.vram_frac = 1.0
-        self.game_num = 50
+        self.game_num = 2
         self.replace_rate = 0.55
         self.play_config = PlayConfig()
         self.play_config.simulation_num_per_move = 200
@@ -28,7 +28,7 @@ class PlayDataConfig:
 
 class PlayConfig:
     def __init__(self):
-        self.max_processes = 1
+        self.max_processes = 3
         self.search_threads = 16
         self.vram_frac = 1.0
         self.simulation_num_per_move = 100

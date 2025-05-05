@@ -59,7 +59,7 @@ class ChessModel:
         Builds the full Keras model and stores it in self.model.
         """
         mc = self.config.model
-        in_x = x = Input((18, 8, 8))
+        in_x = x = Input((18, 8, 8), name ="input_1")
 
         # (batch, channels, height, width)
         x = Conv2D(filters=mc.cnn_filter_num, kernel_size=mc.cnn_first_filter_size, padding="same",
@@ -83,8 +83,8 @@ class ChessModel:
         policy_out = Dense(self.config.n_labels, kernel_regularizer=l2(mc.l2_reg), activation="softmax", name="policy_out")(x)
 
         # for value output
-        x = Conv2D(filters=4, kernel_size=1, data_format="channels_first", use_bias=False, kernel_regularizer=l2(mc.l2_reg),
-                    name="value_conv-1-4")(res_out)
+        x = Conv2D(filters=1, kernel_size=1, data_format="channels_first", use_bias=False, kernel_regularizer=l2(mc.l2_reg),
+                    name="value_conv-1-1")(res_out)
         x = BatchNormalization(axis=1, name="value_batchnorm")(x)
         x = Activation("relu",name="value_relu")(x)
         x = Flatten(name="value_flatten")(x)
