@@ -64,6 +64,6 @@ class ModelConfig:
     cnn_filter_size = 3
     res_layer_num = 7
     l2_reg = 1e-4
-    value_fc_size = 64
+    value_fc_size = 256
     distributed = True
     input_depth = 18
