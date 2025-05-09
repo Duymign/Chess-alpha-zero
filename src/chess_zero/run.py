@@ -13,8 +13,11 @@ if _PATH_ not in sys.path:
     sys.path.append(_PATH_)
 
 
-if __name__ == "__main__":
-    mp.set_start_method('spawn')
-    sys.setrecursionlimit(10000)
+def main():
     from chess_zero import manager
     manager.start()
+
+if __name__ == "__main__":
+    mp.set_start_method('spawn', force=True)
+    sys.setrecursionlimit(10000)
+    main()
